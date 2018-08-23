@@ -6,6 +6,7 @@ include: "base.model.lkml"
 label: "Extend Example"
 
 explore: order_items_extend_company_A {
+  hidden: no
   extends: [order_items]
   label: "Order Items Extended for Company A"
 
