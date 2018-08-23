@@ -106,6 +106,33 @@ view: order_items {
     drill_fields: [detail*]
   }
 
+  #financial measures
+  measure: total_sale_price {
+    type: sum
+    sql:${sale_price};;
+    value_format_name: usd_0
+  }
+
+  measure: average_sale_price {
+    type: average
+    sql: ${sale_price} ;;
+    value_format_name: usd
+  }
+
+  measure:  gross_margin {
+    description: "Sale price minus item cost"
+    type: number
+    sql:  ${sale_price} - ${inventory_items.cost} ;;
+    value_format_name: usd_0
+  }
+
+  measure:  total_gross_margin {
+    description: "Total sale price minus total cost"
+    type: number
+    sql:  ${total_sale_price} - ${inventory_items.total_cost} ;;
+    value_format_name: usd_0
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
