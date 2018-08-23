@@ -10,7 +10,7 @@ explore: order_items_extend_company_A {
   extends: [order_items]
   label: "Order Items Extended for Company A"
 
-  # sql_always_where: ${products.brand} = '{{_user_attributes["brand"] }}' ;;
+  sql_always_where: ${products.brand} = '{{_user_attributes["brand"] }}' ;;
 
   fields: [ALL_FIELDS*,
     - order_items.total_sale_price,
