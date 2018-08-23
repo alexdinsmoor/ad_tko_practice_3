@@ -3,6 +3,7 @@ include: "*.view.lkml"         # include all views in this project
 
 include: "base.model.lkml"
 
+label: "Extend Example"
 
 explore: order_items_extend_company_A {
   extends: [order_items]
