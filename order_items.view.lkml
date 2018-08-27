@@ -133,6 +133,23 @@ view: order_items {
     value_format_name: usd_0
   }
 
+  # test pivot and dynamic field labels use case
+
+  dimension: column1 {
+    type: string
+    sql: 'column1' ;;
+  }
+
+  dimension: column1_join_key {
+    type: string
+    sql: right(${column1},1) ;;
+  }
+
+  dimension: column2 {
+    type: string
+    sql: 'column2' ;;
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
