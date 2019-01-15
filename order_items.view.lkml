@@ -102,6 +102,7 @@ view: order_items {
   }
 
   measure: count {
+    label: "Company A Definition"
     type: count
     drill_fields: [detail*]
   }
