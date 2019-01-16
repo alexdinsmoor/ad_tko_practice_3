@@ -907,10 +907,7 @@ view: bmg_sample_data {
   distribution_style: all
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+## sample dimensions
 
   dimension: sale_date {
     type: string
@@ -995,36 +992,43 @@ view: bmg_sample_data {
   dimension: gross_price {
     type: string
     sql: ${TABLE}.gross_price ;;
+    value_format_name: usd
   }
 
   dimension: discount {
     type: string
     sql: ${TABLE}.discount ;;
+    value_format_name: usd
   }
 
   dimension: net_price {
     type: string
     sql: ${TABLE}.net_price ;;
+    value_format_name: usd
   }
 
   dimension: sales_tax {
     type: string
     sql: ${TABLE}.sales_tax ;;
+    value_format_name: usd
   }
 
   dimension: total_price {
     type: string
     sql: ${TABLE}.total_price ;;
+    value_format_name: usd
   }
 
   dimension: initial_payment {
     type: string
     sql: ${TABLE}.initial_payment ;;
+    value_format_name: usd
   }
 
   dimension: insurance_payment {
     type: string
     sql: ${TABLE}.insurance_payment ;;
+    value_format_name: usd
   }
 
   dimension: insurance_co {
@@ -1035,16 +1039,19 @@ view: bmg_sample_data {
   dimension: fees {
     type: string
     sql: ${TABLE}.fees ;;
+    value_format_name: usd
   }
 
   dimension: non_ha {
     type: string
     sql: ${TABLE}.non_ha ;;
+    value_format_name: usd
   }
 
   dimension: balance_paid {
     type: string
     sql: ${TABLE}.balance_paid ;;
+    value_format_name: usd
   }
 
   dimension: balance_due {
@@ -1052,7 +1059,7 @@ view: bmg_sample_data {
     sql: ${TABLE}.balance_due ;;
   }
 
-  dimension: late_date_paid {
+  dimension: last_date_paid {
     type: string
     sql: ${TABLE}.late_date_paid ;;
   }
@@ -1061,6 +1068,66 @@ view: bmg_sample_data {
     type: string
     sql: ${TABLE}.companion ;;
   }
+
+## sample measures
+
+  measure: average_days_to_pay_balance {
+    type: number
+    sql: ${sale_date} - ${last_date_paid} ;;
+    value_format_name: decimal_1
+  }
+
+  measure: total_units {
+    type: sum
+    sql: ${units} ;;
+    value_format_name: decimal_0
+    drill_fields: [detail*]
+  }
+
+  measure: average_units {
+    type: average
+    sql: ${units} ;;
+    value_format_name: decimal_0
+    drill_fields: [detail*]
+  }
+
+  measure: total_gross_price {
+    type: sum
+    sql: ${gross_price} ;;
+    value_format_name: usd
+    drill_fields: [detail*]
+  }
+
+  measure: average_gross_price {
+    type: average
+    sql: ${gross_price};;
+    value_format_name: usd
+    drill_fields: [detail*]
+  }
+
+  measure: total_net_price {
+    type: sum
+    sql: ${net_price} ;;
+    value_format_name: usd
+    drill_fields: [detail*]
+  }
+
+  measure: average_net_price {
+    type: average
+    sql: ${net_price} ;;
+    value_format_name: usd
+    drill_fields: [detail*]
+  }
+
+  measure: average_discount {
+    description:"Shown as a percentage"
+    type: number
+    sql: 1 - (${average_net_price} / nullif(${average_gross_price},0)) ;;
+    value_format_name: percent_1
+    drill_fields: [detail*]
+  }
+
+## sample drill sets
 
   set: detail {
     fields: [
@@ -1092,7 +1159,7 @@ view: bmg_sample_data {
       non_ha,
       balance_paid,
       balance_due,
-      late_date_paid,
+      last_date_paid,
       companion
     ]
   }
