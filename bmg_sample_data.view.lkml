@@ -1071,12 +1071,6 @@ view: bmg_sample_data {
 
 ## sample measures
 
-  measure: average_days_to_pay_balance {
-    type: number
-    sql: ${sale_date} - ${last_date_paid} ;;
-    value_format_name: decimal_1
-  }
-
   measure: total_units {
     type: sum
     sql: ${units} ;;
