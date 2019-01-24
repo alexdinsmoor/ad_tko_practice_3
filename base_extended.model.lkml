@@ -18,9 +18,9 @@ explore: order_items_extend_company_A {
     - order_items.total_gross_margin
   ]
 
-  join: users {
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${order_items.user_id} = ${users.id} ;;
-  }
+#   join: users {
+#     type: left_outer
+#     relationship: many_to_one
+#     sql_on: ${order_items.user_id} = ${users.id} ;;
+#   }
 }
