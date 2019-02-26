@@ -9,6 +9,8 @@ explore: order_items {
   from: order_items
   description: "Order item information"
 
+  sql_always_where: ${products.brand} like '%{{_user_attributes["brand"] }}%' ;;
+
   join: inventory_items {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
