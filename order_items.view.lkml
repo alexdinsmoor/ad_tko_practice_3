@@ -90,7 +90,7 @@ view: order_items {
   }
 
   measure: total_sales {
-    description: "Revenue for in-app purchases"
+    description: "Company revenue"
     type: sum
     sql: ${sale_price} ;;
     value_format_name: usd
