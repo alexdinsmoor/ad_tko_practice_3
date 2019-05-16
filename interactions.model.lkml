@@ -19,10 +19,6 @@ include: "*.view.lkml"                       # include all views in this project
 # }
 
 explore: order_items {
-  join: users {
-#     type: left_outer
-#  annotations
-    relationship: many_to_one
-    sql_on: ${order_items.user_id} = ${users.id};;
-  }
+  group_label: "Interactions"
+  label: "Order Info"
 }
