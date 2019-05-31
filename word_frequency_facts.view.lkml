@@ -1,6 +1,7 @@
 view: word_frequency_facts {
   derived_table: {
-    sql: select id,
+    datagroup_trigger: daily_caching_policy
+    sql: select id, brand,
         SPLIT_PART(SPLIT_PART(tablename.description, ' ', numbers.n+1), ' ', -1) as parsed_description
       from (
         SELECT
@@ -24,7 +25,7 @@ view: word_frequency_facts {
           (SELECT 0 as n UNION SELECT 1) p7
       ) as numbers
       INNER JOIN (
-        SELECT id, name as description
+        SELECT id, brand, name as description
         FROM public.products
         limit 1000
        ) as tablename
@@ -41,6 +42,11 @@ view: word_frequency_facts {
   dimension: id {
     type: number
     sql: ${TABLE}."ID" ;;
+  }
+
+  dimension: brand {
+    type: number
+    sql: ${TABLE}."BRAND" ;;
   }
 
   dimension: parsed_description {

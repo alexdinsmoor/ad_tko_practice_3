@@ -6,4 +6,11 @@ include: "*.view.lkml"                       # include all views in this project
 # # Select the views that should be a part of this model,
 # # and define the joins that connect them together.
 #
+
+datagroup: daily_caching_policy {
+  sql_trigger: select current_date ;;
+  max_cache_age: "24 hours"
+}
+
+
 explore: word_frequency_facts {}
