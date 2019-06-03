@@ -45,7 +45,7 @@ view: word_frequency_facts {
   }
 
   dimension: brand {
-    type: number
+    type: string
     sql: ${TABLE}."BRAND" ;;
   }
 
