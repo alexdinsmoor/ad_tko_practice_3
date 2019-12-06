@@ -91,26 +91,36 @@ view: order_items {
   }
 
   measure: count {
+    label: "Nodes"
     type: count
     drill_fields: [id, users.first_name, users.last_name, users.id]
   }
 
-  measure: survey_partial_count {
+  measure: nodes_offline {
     type: count_distinct
     sql: ${id} ;;
     filters: {
       field: status
-      value: "Returned"
+      value: "Cancelled"
     }
   }
 
-  measure: survey_partial_percentage {
+  measure: node_churn_percentage {
     type: number
-    sql: 1.0*${survey_partial_count} / nullif(${count},0) ;;
     value_format_name: percent_1
-    drill_fields: [id, users.first_name, users.last_name, users.id]
+    sql: 1.0*${nodes_offline} / nullif(${count},0) ;;
+    drill_fields: [node_details*]
   }
 
+  # drill fields
 
+  set: node_details {
+    fields: [
+      id
+      , created_date
+      , status
+      , count
+    ]
+  }
 
 }
