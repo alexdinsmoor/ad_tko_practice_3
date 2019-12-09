@@ -39,12 +39,6 @@ view: node_rolling_facts {
     }
   }
 
-  dimension: rolling_bound {
-    hidden: yes
-    type: number
-    sql: ${rolling_days_period}-1 ;;
-  }
-
   dimension: created_date {
     hidden: yes
     primary_key: yes
