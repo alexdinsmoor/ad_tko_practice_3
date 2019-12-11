@@ -1,4 +1,4 @@
-view: order_items {
+view: order_items_1 {
   sql_table_name: PUBLIC.ORDER_ITEMS ;;
   drill_fields: [id]
 
@@ -90,8 +90,40 @@ view: order_items {
     sql: ${TABLE}."USER_ID" ;;
   }
 
+  dimension: is_offline {
+    type: yesno
+    sql: ${status} = 'Cancelled' ;;
+  }
+
+  ## measures
+
   measure: count {
     type: count
-    drill_fields: [id, users.first_name, users.last_name, users.id]
+    drill_fields: [id, users.last_name, users.first_name, users.id]
   }
+
+  measure: total_nodes_offline {
+    description: "Offline status indicates node is down"
+    type: count_distinct
+    sql: ${id} ;;
+    value_format_name: decimal_0
+    drill_fields: [drill_details*]
+    filters: {
+      field: is_offline
+      value: "yes"
+    }
+  }
+
+  measure: total_churn_percentage {
+    type: number
+    sql: 1.0*${total_nodes_offline} / nullif(${count},0) ;;
+    value_format_name: percent_1
+    drill_fields: [drill_details*]
+  }
+
+  set: drill_details {
+    fields: [id, users.last_name, users.first_name, users.id]
+  }
+
+
 }

@@ -16,13 +16,6 @@ datagroup: daily_caching_policy {
 
 ## EXPLORES ##
 
-explore: order_items {
-  join: users {
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${order_items.user_id} = ${users.id} ;;
-  }
-}
 
 
 

@@ -1,4 +1,4 @@
-view: users {
+view: users_1 {
   sql_table_name: PUBLIC.USERS ;;
   drill_fields: [id]
 
@@ -85,6 +85,6 @@ view: users {
 
   measure: count {
     type: count
-    drill_fields: [id, first_name, last_name, order_items.count]
+    drill_fields: [id, last_name, first_name, order_items.count]
   }
 }
