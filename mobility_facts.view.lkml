@@ -3,8 +3,8 @@
 
 view: mobility_facts {
   derived_table: {
-#     publish_as_db_view: yes
-#     datagroup_trigger: hourly
+    publish_as_db_view: yes
+    datagroup_trigger: hourly
     explore_source: mobile_data_2015_2017 {
       column: provider {}
       column: date_date {}
@@ -13,9 +13,11 @@ view: mobility_facts {
   }
   dimension: provider {}
   dimension: date_date {
+    label: "Reading"
     type: date
   }
   dimension: average_signal {
     type: number
+    value_format_name: decimal_1
   }
 }
