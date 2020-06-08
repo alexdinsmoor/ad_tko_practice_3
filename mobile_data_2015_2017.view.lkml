@@ -22,6 +22,11 @@ view: mobile_data_2015_2017 {
     sql: ${TABLE}.date ;;
   }
 
+#   dimension: days_to_roll_forward {
+#     type: number
+#     sql_start: date_diff('2017-12-31',current_date,day) ;;
+#   }
+
   dimension: description {
     type: string
     sql: ${TABLE}.description ;;

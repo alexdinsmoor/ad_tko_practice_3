@@ -3,7 +3,7 @@
 
 view: mobility_facts {
   derived_table: {
-    publish_as_db_view: yes
+#     publish_as_db_view: yes
     datagroup_trigger: hourly
     explore_source: mobile_data_2015_2017 {
       column: provider {}
