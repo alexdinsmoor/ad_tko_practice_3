@@ -131,6 +131,7 @@ view: mobile_data_2015_2017 {
   measure: average_signal {
     type: average
     sql: ${signal} ;;
+    value_format_name: decimal_1
   }
 
   measure: count {
