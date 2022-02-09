@@ -9,6 +9,7 @@ include: "*.view.lkml"                       # include all views in this project
 
 ## DATAGROUPS ##
 
+
 datagroup: daily_caching_policy {
   sql_trigger: select current_date ;;
   max_cache_age: "24 hours"
