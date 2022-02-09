@@ -12,6 +12,7 @@ explore: mobile_data_2015_2017 {
   label: "Mobility Details"
 }
 
+
 explore: mobility_facts {}
 
 datagroup: hourly {
